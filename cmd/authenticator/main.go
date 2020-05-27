@@ -38,7 +38,7 @@ func main() {
 	initLoggers()
 	infoLog := log.New(infoFile, "INFO\t", log.Ldate|log.Ltime)
 	defer infoFile.Close()
-	infoLog.Println("Loggers initialized.")
+	infoLog.Println("Logger initialized.")
 
 	// DB Initialization
 	db, err := openDB(*dsn)
