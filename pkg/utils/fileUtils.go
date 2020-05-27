@@ -2,6 +2,7 @@ package utils
 
 import (
 	"io/ioutil"
+	"log"
 	"mime/multipart"
 	"os"
 	"strings"
@@ -9,6 +10,15 @@ import (
 
 // SaveUploadedFile to save the file contents in temp location
 func SaveUploadedFile(fileToSave *multipart.File, UploadFileHeaders *multipart.FileHeader) (string, error) {
+	_, err := os.Stat("temp")
+
+	if os.IsNotExist(err) {
+		errDir := os.Mkdir("temp", 0755)
+		if errDir != nil {
+			log.Fatal(err)
+		}
+
+	}
 	fileNameSplit := strings.Split(UploadFileHeaders.Filename, ".")
 	tempFileName := fileNameSplit[0]
 	tempFileExt := fileNameSplit[len(fileNameSplit)-1]
