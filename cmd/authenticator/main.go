@@ -12,10 +12,8 @@ import (
 )
 
 var infoFile *os.File
-var errorFile *os.File
 
 type application struct {
-	errorLog        *log.Logger
 	infoLog         *log.Logger
 	DBConn          *sqlite.CountersModel
 	authenticatorID string
@@ -24,10 +22,6 @@ type application struct {
 func initLoggers() {
 	var err error
 	infoFile, err = os.OpenFile("./info.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatal(err)
-	}
-	errorFile, err = os.OpenFile("./error.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -44,20 +38,17 @@ func main() {
 	initLoggers()
 	infoLog := log.New(infoFile, "INFO\t", log.Ldate|log.Ltime)
 	defer infoFile.Close()
-	errorLog := log.New(errorFile, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
-	defer errorFile.Close()
 	infoLog.Println("Loggers initialized.")
 
 	// DB Initialization
 	db, err := openDB(*dsn)
 	if err != nil {
-		errorLog.Fatal(err)
+		infoLog.Fatal(err)
 	}
 	defer db.Close()
 	infoLog.Println("DB initialized.")
 
 	app := &application{
-		errorLog:        errorLog,
 		infoLog:         infoLog,
 		DBConn:          &sqlite.CountersModel{DB: db},
 		authenticatorID: "authenticator-1", // TODO: create a unique-id dynamically.
@@ -65,18 +56,18 @@ func main() {
 
 	_, err = app.DBConn.CreateTable()
 	if err != nil {
-		errorLog.Fatal(err)
+		infoLog.Fatal(err)
 	}
 
 	// Server Initialization
 	srv := &http.Server{
 		Addr:     *addr,
-		ErrorLog: errorLog,
+		ErrorLog: infoLog,
 		Handler:  app.routes(),
 	}
 	infoLog.Printf("Starting server on %s", srv.Addr)
 	err = srv.ListenAndServe()
-	errorLog.Fatal(err)
+	infoLog.Fatal(err)
 }
 
 func openDB(dsn string) (*sql.DB, error) {
