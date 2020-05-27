@@ -1,0 +1,23 @@
+INFO	2020/05/19 18:29:32 Starting server on :4000
+INFO	2020/05/19 19:05:51 Starting server on :4000
+INFO	2020/05/20 10:29:02 Loggers initialized.
+INFO	2020/05/20 10:29:02 DB initialized.
+INFO	2020/05/20 10:29:02 Starting server on :4000
+INFO	2020/05/20 10:29:18 Upload request hit.
+INFO	2020/05/20 10:29:18 Request Data Processor started for scanID 23423ed2e2342r23epi09i09j0j09093ver2r1324
+INFO	2020/05/20 10:29:19 DB insertion successfull.
+INFO	2020/05/20 10:29:19 Request Data processor completed successfull.
+INFO	2020/05/20 13:04:51 Loggers initialized.
+INFO	2020/05/20 13:04:51 DB initialized.
+INFO	2020/05/20 13:04:51 Starting server on :4000
+INFO	2020/05/20 13:05:11 - 127.0.0.1:52698 - HTTP/1.1 GET /
+INFO	2020/05/20 13:05:11 - 127.0.0.1:52698 - HTTP/1.1 GET /favicon.ico
+INFO	2020/05/20 13:05:14 - 127.0.0.1:52698 - HTTP/1.1 GET /
+INFO	2020/05/20 13:05:32 - [::1]:45760 - HTTP/1.1 POST /upload
+INFO	2020/05/20 13:05:32 Upload request hit.
+INFO	2020/05/20 13:05:32 Request Data Processor started for scanID 23423ed2e2342r23epi09i09j9093ver2r1324
+INFO	2020/05/20 13:05:32 DB insertion successfull.
+INFO	2020/05/20 13:05:32 Request Data processor completed successfull.
+INFO	2020/05/20 13:11:37 - 127.0.0.1:52728 - HTTP/1.1 GET /getcount
+INFO	2020/05/20 13:11:37 GetCount Started.
+INFO	2020/05/20 13:11:37 GetCount successfully completed.
